@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageprince
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @package Abm_Productdocument
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="alert.urls">
+            <block class="Abm\Productdocument\Block\Productdocument" name="productdocument" as="productdocument" template="Abm_Productdocument::document.phtml" ifconfig="productdocument/general/productdetail" cacheable="false"/>
+        </referenceContainer>
+        <referenceBlock name="product.info.details">
+          <block class="Abm\Productdocument\Block\Productdocument" name="productdocument.tab" as="productdocument" template="Abm_Productdocument::document.phtml" group="detailed_info" ifconfig="productdocument/general/producttab" cacheable="false">
+             <arguments>
+                <argument name="title" xsi:type="helper" helper="Abm\Productdocument\Block\Productdocument::getTabName"></argument>
+             </arguments>
+          </block>
+        </referenceBlock>
+    </body>
+</page>

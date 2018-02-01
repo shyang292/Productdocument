@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageprince
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @package Abm_Productdocument
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <!--
+    <menu>
+        <add id="Abm_Productdocument::top_level" title="Product Document" module="Abm_Productdocument" sortOrder="30" resource="Abm_Productdocument::productdocument"/>
+        <add id="Abm_Productdocument::productdocument_manage" title="Manage Documents" module="Abm_Productdocument" sortOrder="10" parent="Abm_Productdocument::top_level" action="productdocument/index/" resource="Magento_Backend::content"/>
+        <add id="Abm_Productdocument::productdocument_setting" title="Settings" module="Abm_Productdocument" sortOrder="20" parent="Abm_Productdocument::top_level" action="adminhtml/system_config/edit/section/productdocument" resource="Magento_Backend::content"/>
+    </menu>
+    -->
+
+    <menu>
+        <add id="Abm_Productdocument::top_level" title="Product Documnet" module="Abm_Productdocument" sortOrder="100" parent="Magento_Catalog::catalog" resource="Abm_Productdocument::productdocument" />
+        <add id="Abm_Productdocument::productdocument_manage" title="Documnet" module="Abm_Productdocument" sortOrder="10" parent="Abm_Productdocument::top_level" action="productdocument/index/" resource="Magento_Backend::content"/>
+        <add id="Abm_Productdocument::productdocument_setting" title="Settings" module="Abm_Productdocument" sortOrder="20" parent="Abm_Productdocument::top_level" action="adminhtml/system_config/edit/section/productdocument" resource="Magento_Backend::content"/>
+    </menu>
+</config>

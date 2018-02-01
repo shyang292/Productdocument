@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Mageprince
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @package Abm_Productdocument
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Abm\Productdocument\Block\Document */
+?>
+<?php if($block->isEnable()): ?>
+    <?php $productId = $block->getCurrentId(); ?>
+    <?php $documentments = $block->getDocument($productId); ?>
+    <?php $documentmentsNew = $block->getDocumentNew($productId); ?>
+    <?php $isSize = $block->getConfig('productdocument/general/documentmentsize'); ?>
+
+
+    <?php if(isset($documentmentsNew) && count($documentmentsNew)):?>
+        <?php foreach ($documentmentsNew as $documentment) : ?>
+            <?php if ($documentment->getActive()) : ?>
+                <div class="product-documentment" style="margin-bottom: 10px;">
+                    <?php if ($documentment->getFile()) : ?>
+                        <a href="<?php /* @noEscape */ echo $block->getDocumentUrl($documentment->getFile()); ?>" target="_blank">
+                            <div class="documentment-icon" style="float: left; padding-right: 10px;">
+                             <img src="<?php /* @noEscape */ echo $block->getFileIcon($documentment->getFileExt()) ?>"; />
+                            </div>
+                            <?php /* @noEscape */ echo $documentment->getName(); ?>
+                        </a>
+                        <?php if ($isSize) : ?>
+                            <?php $size = '(Size: '.$block->getFileSize($documentment->getFile()).')' ?>
+                            <?php /* @noEscape */ echo __($size); ?>
+                        <?php endif; ?>
+                    <?php elseif ($documentment->getUrl()) : ?>
+                        <a href="<?php /* @noEscape */ echo $documentment->getUrl(); ?>" target="_blank" >
+                            <div class="documentment-icon" style="float: left; padding-right: 10px;">
+                                <img src="<?php /* @noEscape */ echo $block->getLinkIcon(); ?>" />
+                            </div>
+                            <?php /* @noEscape */ echo $documentment->getName(); ?>
+                        </a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php else:?>
+        There is no Doucment for this product yet !
+    <?php endif;?>
+<?php endif; ?>
