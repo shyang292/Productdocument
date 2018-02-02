@@ -87,29 +87,36 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         ]);
         
         $this->addColumn(
-            'name',
+            'docname',
             [
                 'header' => __('Name'),
-                'index' => 'name'
+                'index' => 'docname'
+            ]
+        );
+        $this->addColumn(
+            'url',
+            [
+                'header' => __('FileName'),
+                'index' => 'url'
             ]
         );
 
-        $this->addColumn(
-            'description',
-            [
-                'header' => __('Description'),
-                'index' => 'description'
-            ]
-        );
+//        $this->addColumn(
+//            'description',
+//            [
+//                'header' => __('Description'),
+//                'index' => 'description'
+//            ]
+//        );
 
-        $this->addColumn(
-            'file',
-            [
-                'header' => __('File'),
-                'index' => 'file',
-                'renderer' => 'Abm\Productdocument\Block\Adminhtml\Productdocument\Renderer\FileIcon'
-            ]
-        );
+//        $this->addColumn(
+//            'file',
+//            [
+//                'header' => __('File'),
+//                'index' => 'file',
+//                'renderer' => 'Abm\Productdocument\Block\Adminhtml\Productdocument\Renderer\FileIcon'
+//            ]
+//        );
         
         $this->addColumn(
             'customer_group',

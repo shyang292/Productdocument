@@ -25,14 +25,14 @@ class Productdocument extends \Magento\Framework\View\Element\Template
      * @var Abm\Productdocument\Model\ResourceModel\Productdocument\Collection
      */
     private $productdocumentCollection = null;
-    
+
     /**
      * Productdocument factory
      *
      * @var Abm\Productdocument\Model\ProductdocumentFactory
      */
     private $productdocumentCollectionFactory;
-    
+
     /**
      * @var Abm\Productdocument\Helper\Data
      */
@@ -57,7 +57,7 @@ class Productdocument extends \Magento\Framework\View\Element\Template
      * @var Magento\Framework\Registry
      */
     private $registry;
-    
+
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
@@ -87,7 +87,7 @@ class Productdocument extends \Magento\Framework\View\Element\Template
             $data
         );
     }
-    
+
     /**
      * Check module is enable or not
      */
@@ -106,18 +106,24 @@ class Productdocument extends \Magento\Framework\View\Element\Template
         $collection = $this->productdocumentCollectionFactory->create();
         return $collection;
     }
-    
+
     /**
      * Filter productdocument collection by product Id
      *
      * @return collection
      */
-    public function getDocument($productId)
+    public function getDocument( $type)
     {
+        $categoryIds = $this->getCurrentCategoryIds();
+        $sku = $this->getCurrentSku();
+        $sku = "[[:<:]]".$sku."[[:>:]]";
+        $categoryIdsStr = '';
+        foreach ($categoryIds as $cat){
+            $categoryIdsStr.= "[[:<:]]".$cat."[[:>:]]|";
+        }
+        $categoryIdsStr = substr($categoryIdsStr,0,-1);//remove the last |
         $collection = $this->getCollection();
-        $collection->getSelect()->where("store LIKE '%".$this->dataHelper->getStoreId()."%'");
-        $collection->getSelect()->where("customer_group LIKE '%".$this->getCustomerId()."%'");
-        $collection->getSelect()->where("products REGEXP '[[:<:]]".$productId."[[:>:]]'");
+        $collection->getSelect()->where("(products REGEXP '$sku' OR category_group REGEXP '$categoryIdsStr') AND (type = '$type')");
         return $collection;
     }
 
@@ -129,19 +135,10 @@ class Productdocument extends \Magento\Framework\View\Element\Template
      */
     public function getDocumentNew($productId)
     {
-
-        $categoryId = $this->getCategoryGroup($this->getCurrentCategoryIds());
-        $categoryIds = "',".str_replace(',',',|',$categoryId).",'";
-
-//        $collection = $this->getCollection();
-//        $collection->getSelect()->where("store LIKE '%".$this->_dataHelper->getStoreId()."%'");
-//        $collection->getSelect()->where("customer_group LIKE '%".$this->getCustomerId()."%'");
+        $categoryIds = $this->getCategoryGroup($this->getCurrentCategoryIds());
+        $sku = $this->getCurrentSku();
         $collection = $this->getCollection();
-        $collection->getSelect()->where("store LIKE '%".$this->dataHelper->getStoreId()."%'");
-        $collection->getSelect()->where("customer_group LIKE '%".$this->getCustomerId()."%'");
-        $collection->getSelect()->where("products REGEXP '[[:<:]]".$productId."[[:>:]]' or concat(',',category_group,',') regexp concat($categoryIds)");
-
-
+        $collection->getSelect()->where("sku = '$sku' OR category_id IN ($categoryIds)");
         return $collection;
     }
 
@@ -161,7 +158,7 @@ class Productdocument extends \Magento\Framework\View\Element\Template
      */
     public function getDocumentUrl($document)
     {
-        $url = $this->dataHelper->getBaseUrl().'/'.$document;
+        $url = $this->dataHelper->getBaseUrl().'/document/'.$document;
         return $url;
     }
 
@@ -175,6 +172,13 @@ class Productdocument extends \Magento\Framework\View\Element\Template
         $product = $this->registry->registry('current_product');
         return $product->getId();
     }
+
+    public function getCurrentSku()
+    {
+        $product = $this->registry->registry('current_product');
+        return $product->getSku();
+    }
+
 
     /**
      * tony add
@@ -230,6 +234,7 @@ class Productdocument extends \Magento\Framework\View\Element\Template
      */
     public function getFileSize($document)
     {
+        //print_r($document);echo "<br>";
         $url = $this->getDocumentUrl($document);
         $fileSize = $this->convertToReadableSize($this->remoteFileSize($url));
         return $fileSize;
@@ -253,7 +258,7 @@ class Productdocument extends \Magento\Framework\View\Element\Template
     public function convertToReadableSize($size)
     {
         $base = log($size) / log(1024);
-        $suffix = ["", " KB", " MB", " GB", " TB"];
+        $suffix = ["B", " KB", " MB", " GB", " TB"];
         $f_base = floor($base);
         return round(pow(1024, $base - floor($base)), 1) . $suffix[$f_base];
     }

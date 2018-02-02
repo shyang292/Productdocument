@@ -186,27 +186,28 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         }
 
         $fieldset->addField(
-            'name',
+            'docname',
             'text',
             [
-                'name' => 'name',
+                'name' => 'docname',
                 'label' => __('Document Name'),
                 'title' => __('Document Name'),
                 'required' => true,
+                'value' => 'document name',
                 'disabled' => $isElementDisabled
             ]
         );
 
-        $fieldset->addField(
-            'description',
-            'textarea',
-            [
-                'name' => 'description',
-                'label' => __('Description'),
-                'title' => __('Description'),
-                'disabled' => $isElementDisabled
-            ]
-        );
+//        $fieldset->addField(
+//            'description',
+//            'textarea',
+//            [
+//                'name' => 'description',
+//                'label' => __('Description'),
+//                'title' => __('Description'),
+//                'disabled' => $isElementDisabled
+//            ]
+//        );
         
         $fieldset->addField(
             'files',
@@ -254,19 +255,19 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
             ]
         );
 
-        $fieldset->addField(
-            'customer_group',
-            'multiselect',
-            [
-                'name' => 'customer_group[]',
-                'label' => __('Customer Group'),
-                'title' => __('Customer Group'),
-                'required' => true,
-                'value' => [0,1,2,3],
-                'values' => $customerGroup,
-                'disabled' => $isElementDisabled
-            ]
-        );
+//        $fieldset->addField(
+//            'customer_group',
+//            'multiselect',
+//            [
+//                'name' => 'customer_group[]',
+//                'label' => __('Customer Group'),
+//                'title' => __('Customer Group'),
+//                'required' => true,
+//                'value' => [0,1,2,3],
+//                'values' => $customerGroup,
+//                'disabled' => $isElementDisabled
+//            ]
+//        );
 
         $fieldset->addField(
             'category_group',
@@ -280,19 +281,19 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
             ]
         );
 
-        $fieldset->addField(
-            'store',
-            'multiselect',
-            [
-                'name' => 'store[]',
-                'label' => __('Store'),
-                'title' => __('Store'),
-                'required' => true,
-                'value' => [0,1],
-                'values' => $this->systemStore->getStoreValuesForForm(false, true),
-                'disabled' => $isElementDisabled
-            ]
-        );
+//        $fieldset->addField(
+//            'store',
+//            'multiselect',
+//            [
+//                'name' => 'store[]',
+//                'label' => __('Store'),
+//                'title' => __('Store'),
+//                'required' => true,
+//                'value' => [0,1],
+//                'values' => $this->systemStore->getStoreValuesForForm(false, true),
+//                'disabled' => $isElementDisabled
+//            ]
+//        );
 
         $fieldset->addField(
             'active',
