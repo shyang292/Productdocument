@@ -51,4 +51,16 @@ class File extends \Magento\Ui\Component\Listing\Columns\Column
         }
         return $dataSource;
     }
+
+//    public function prepareDataSourceOld(array $dataSource)
+//    {
+//        if (isset($dataSource['data']['items'])) {
+//            foreach ($dataSource['data']['items'] as & $item) {
+//                if (!isset($item['file'])) {
+//                    $item['file'] = __('--- No File ---');
+//                }
+//            }
+//        }
+//        return $dataSource;
+//    }
 }

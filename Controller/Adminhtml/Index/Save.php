@@ -77,12 +77,13 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPostValue();
         if ($data) {
             $data = $this->dataProcessor->filter($data);
-            $customerGroup = $this->helper->getCustomerGroup($data['customer_group']);
+//            print_r($data);die();
+            //$customerGroup = $this->helper->getCustomerGroup($data['customer_group']);
             $categoryGroup = $this->helper->getCustomerGroup($data['category_group']); /*tony add*/
-            $store = $this->helper->getStores($data['store']);
-            $data['customer_group'] = $customerGroup;
+//            $store = $this->helper->getStores($data['store']);
+            //$data['customer_group'] = $customerGroup;
             $data['category_group'] = $categoryGroup; /*tony add*/
-            $data['store'] = $store;
+//            $data['store'] = $store;
             $uploadedFile = '';
             $model = $this->documentModel;
             $id = $this->getRequest()->getParam('productdocument_id');
@@ -91,7 +92,6 @@ class Save extends \Magento\Backend\App\Action
                 $model->load($id);
                 $uploadedFile = $model->getFile();
             }
-            
             $model->addData($data);
 
             if (!$this->dataProcessor->validate($data)) {

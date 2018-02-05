@@ -186,10 +186,10 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         }
 
         $fieldset->addField(
-            'docname',
+            'name',
             'text',
             [
-                'name' => 'docname',
+                'name' => 'name',
                 'label' => __('Document Name'),
                 'title' => __('Document Name'),
                 'required' => true,

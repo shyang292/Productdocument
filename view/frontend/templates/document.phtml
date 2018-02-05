@@ -2,6 +2,7 @@
 <br/><br/>
 
 <?php if($block->isEnable()): ?>
+    <?php $i = 0;?>
     <?php $dbn=array("Protocol","MSDS","QC","Other"); ?>
     <?php foreach ($dbn as $val) :?>
         <?php $documents = $block->getDocument($val); ?>
@@ -28,8 +29,10 @@
                 <?php endforeach; ?>
             </ul>
             <br/>
+            <?php $i++; ?>
         <?php endif; ?>
     <?php endforeach; ?>
-
-
+    <?php if($i == 0):?>
+        There is no Documents for this product yet !
+    <?php endif;?>
 <?php endif; ?>

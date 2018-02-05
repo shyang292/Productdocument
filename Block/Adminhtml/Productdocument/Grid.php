@@ -87,19 +87,19 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         ]);
         
         $this->addColumn(
-            'docname',
+            'name',
             [
                 'header' => __('Name'),
-                'index' => 'docname'
+                'index' => 'name'
             ]
         );
-        $this->addColumn(
-            'url',
-            [
-                'header' => __('FileName'),
-                'index' => 'url'
-            ]
-        );
+//        $this->addColumn(
+//            'url',
+//            [
+//                'header' => __('FileName'),
+//                'index' => 'url'
+//            ]
+//        );
 
 //        $this->addColumn(
 //            'description',
@@ -109,32 +109,32 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 //            ]
 //        );
 
+        $this->addColumn(
+            'url',
+            [
+                'header' => __('File'),
+                'index' => 'url',
+                'renderer' => 'Abm\Productdocument\Block\Adminhtml\Productdocument\Renderer\FileIcon'
+            ]
+        );
+        
 //        $this->addColumn(
-//            'file',
+//            'customer_group',
 //            [
-//                'header' => __('File'),
-//                'index' => 'file',
-//                'renderer' => 'Abm\Productdocument\Block\Adminhtml\Productdocument\Renderer\FileIcon'
+//                'header' => __('Customer Group'),
+//                'index' => 'customer_group',
+//                'renderer' => 'Abm\Productdocument\Block\Adminhtml\Productdocument\Renderer\Group'
 //            ]
 //        );
-        
-        $this->addColumn(
-            'customer_group',
-            [
-                'header' => __('Customer Group'),
-                'index' => 'customer_group',
-                'renderer' => 'Abm\Productdocument\Block\Adminhtml\Productdocument\Renderer\Group'
-            ]
-        );
-
-        $this->addColumn(
-            'store',
-            [
-                'header' => __('Store '),
-                'index' => 'store',
-                'renderer' => 'Abm\Productdocument\Block\Adminhtml\Productdocument\Renderer\Store'
-            ]
-        );
+//
+//        $this->addColumn(
+//            'store',
+//            [
+//                'header' => __('Store '),
+//                'index' => 'store',
+//                'renderer' => 'Abm\Productdocument\Block\Adminhtml\Productdocument\Renderer\Store'
+//            ]
+//        );
 
         $this->addColumn(
             'active',
